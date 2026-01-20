@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Jaw Monitor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        #videoContainer {
+            position: relative;
+            width: 100%;
+            max-width: 640px;
+            margin-bottom: 20px;
+        }
+
+        #video {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            transform: scaleX(-1); /* Mirror the video */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        #canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: scaleX(-1); /* Mirror the canvas */
+            pointer-events: none;
+        }
+
+        #status {
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            width: 100%;
+            max-width: 640px;
+            margin-bottom: 10px;
+        }
+
+        #mouthStatus {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .open {
+            color: #4caf50;
+        }
+
+        .closed {
+            color: #f44336;
+        }
+
+        #timer {
+            font-size: 18px;
+            color: #999;
+        }
+
+        #startButton {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #startButton:hover {
+            background-color: #45a049;
+        }
+
+        #startButton:disabled {
+            background-color: #666;
+            cursor: not-allowed;
+        }
+
+        #error {
+            color: #f44336;
+            padding: 10px;
+            display: none;
+        }
+
+        .alerting {
+            animation: pulse 0.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                background-color: #2a2a2a;
+            }
+            50% {
+                background-color: #4a2a2a;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="status">
+            <div id="mouthStatus">Initializing...</div>
+            <div id="timer"></div>
+        </div>
+        <div id="videoContainer">
+            <video id="video" autoplay playsinline></video>
+            <canvas id="canvas"></canvas>
+        </div>
+        <button id="startButton">Start Monitoring</button>
+        <div id="error"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@0.4.1633559619/face_mesh.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3.1620248357/camera_utils.js" crossorigin="anonymous"></script>
+    <script type="module" src="dist/app.js"></script>
+</body>
+</html>

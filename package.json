@@ -1,0 +1,20 @@
+{
+  "name": "jaw-monitor",
+  "version": "1.0.0",
+  "description": "A TypeScript app that monitors mouth open/closed state using front-facing camera",
+  "main": "dist/app.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "serve": "python3 -m http.server 8000"
+  },
+  "keywords": ["typescript", "camera", "face-detection", "mediapipe"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@mediapipe/face_mesh": "^0.4.1633559619"
+  }
+}
