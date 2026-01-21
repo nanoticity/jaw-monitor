@@ -31,7 +31,7 @@ class JawMonitor {
     private gainNode: GainNode | null = null;
     private isAlertPlaying: boolean = false;
     
-    private readonly CLOSED_THRESHOLD = 0.02; // Threshold for detecting closed mouth
+    private readonly CLOSED_THRESHOLD = 0.05; // Threshold for detecting closed mouth (increased to allow slight opening)
     private readonly ALERT_DELAY = 1000; // 1 second delay before alerting
     private readonly ALERT_FREQUENCY = 440; // A4 note frequency
     

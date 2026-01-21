@@ -11,7 +11,7 @@ class JawMonitor {
         this.oscillator = null;
         this.gainNode = null;
         this.isAlertPlaying = false;
-        this.CLOSED_THRESHOLD = 0.02; // Threshold for detecting closed mouth
+        this.CLOSED_THRESHOLD = 0.05; // Threshold for detecting closed mouth (increased to allow slight opening)
         this.ALERT_DELAY = 1000; // 1 second delay before alerting
         this.ALERT_FREQUENCY = 440; // A4 note frequency
         this.video = document.getElementById('video');
