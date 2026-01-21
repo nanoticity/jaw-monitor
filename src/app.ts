@@ -20,6 +20,9 @@ class JawMonitor {
     private startButton: HTMLButtonElement;
     private errorElement: HTMLElement;
     private statusContainer: HTMLElement;
+    private thresholdInput: HTMLInputElement;
+    private updateThresholdButton: HTMLButtonElement;
+    private currentThresholdElement: HTMLElement;
     
     private mouthState: MouthState = {
         isOpen: true,
@@ -31,7 +34,7 @@ class JawMonitor {
     private gainNode: GainNode | null = null;
     private isAlertPlaying: boolean = false;
     
-    private readonly CLOSED_THRESHOLD = 0.09; // Threshold for detecting closed mouth (increased to allow slight opening)
+    private CLOSED_THRESHOLD = 0.05; // Threshold for detecting closed mouth (configurable)
     private readonly ALERT_DELAY = 1000; // 1 second delay before alerting
     private readonly ALERT_FREQUENCY = 440; // A4 note frequency
     
@@ -44,8 +47,12 @@ class JawMonitor {
         this.startButton = document.getElementById('startButton') as HTMLButtonElement;
         this.errorElement = document.getElementById('error')!;
         this.statusContainer = document.getElementById('status')!;
+        this.thresholdInput = document.getElementById('thresholdInput') as HTMLInputElement;
+        this.updateThresholdButton = document.getElementById('updateThresholdButton') as HTMLButtonElement;
+        this.currentThresholdElement = document.getElementById('currentThreshold')!;
         
         this.startButton.addEventListener('click', () => this.initialize());
+        this.updateThresholdButton.addEventListener('click', () => this.updateThreshold());
     }
     
     private async initialize(): Promise<void> {
@@ -286,6 +293,19 @@ class JawMonitor {
     private showError(message: string): void {
         this.errorElement.textContent = message;
         this.errorElement.style.display = 'block';
+    }
+    
+    private updateThreshold(): void {
+        const newThreshold = parseFloat(this.thresholdInput.value);
+        
+        if (isNaN(newThreshold) || newThreshold <= 0 || newThreshold > 0.2) {
+            this.showError('Please enter a valid threshold between 0.01 and 0.2');
+            return;
+        }
+        
+        this.CLOSED_THRESHOLD = newThreshold;
+        this.currentThresholdElement.textContent = `Current: ${newThreshold.toFixed(2)}`;
+        this.errorElement.style.display = 'none';
     }
 }
 

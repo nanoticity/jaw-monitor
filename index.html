@@ -122,6 +122,54 @@
                 background-color: #4a2a2a;
             }
         }
+
+        #settings {
+            background-color: #2a2a2a;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            width: 100%;
+            max-width: 640px;
+            margin-bottom: 10px;
+        }
+
+        #settings label {
+            font-size: 14px;
+            color: #ccc;
+            margin-right: 10px;
+        }
+
+        #thresholdInput {
+            width: 80px;
+            padding: 8px;
+            font-size: 14px;
+            border-radius: 6px;
+            border: 1px solid #444;
+            background-color: #1a1a1a;
+            color: #fff;
+            margin-right: 10px;
+        }
+
+        #updateThresholdButton {
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #updateThresholdButton:hover {
+            background-color: #1976d2;
+        }
+
+        #currentThreshold {
+            font-size: 12px;
+            color: #999;
+            margin-top: 8px;
+        }
     </style>
 </head>
 <body>
@@ -129,6 +177,12 @@
         <div id="status">
             <div id="mouthStatus">Initializing...</div>
             <div id="timer"></div>
+        </div>
+        <div id="settings">
+            <label for="thresholdInput">Threshold:</label>
+            <input type="number" id="thresholdInput" min="0.01" max="0.2" step="0.01" value="0.05">
+            <button id="updateThresholdButton">Update</button>
+            <div id="currentThreshold">Current: 0.05</div>
         </div>
         <div id="videoContainer">
             <video id="video" autoplay playsinline></video>
