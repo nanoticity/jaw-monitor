@@ -228,14 +228,18 @@ class JawMonitor {
         this.errorElement.style.display = 'block';
     }
     updateThreshold() {
+        console.log('Update button clicked');
         const newThreshold = parseFloat(this.thresholdInput.value);
+        console.log('New threshold value:', newThreshold);
         if (isNaN(newThreshold) || newThreshold <= 0 || newThreshold > 0.2) {
+            console.log('Invalid threshold');
             this.showError('Please enter a valid threshold between 0.01 and 0.2');
             return;
         }
         this.CLOSED_THRESHOLD = newThreshold;
         this.currentThresholdElement.textContent = `Current: ${newThreshold.toFixed(2)}`;
         this.errorElement.style.display = 'none';
+        console.log('Threshold updated to:', this.CLOSED_THRESHOLD);
     }
 }
 // Initialize the application when DOM is loaded
